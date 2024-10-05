@@ -31,12 +31,9 @@ jobs:
       with:
           path: './js'
     - name: Install Rust
-      uses: actions-rs/toolchain@v2
+      uses: actions/setup-rust@v1
       with:
-        toolchain: ${{ matrix.rust }}
-        profile: minimal
-        override: true
-        target: ${{ matrix.target }}
+        rust-version: ${{ matrix.rust }}
 
     - name: Build binary
       shell: bash
