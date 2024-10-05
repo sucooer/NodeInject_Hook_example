@@ -15,7 +15,7 @@ jobs:
           target: x86_64-unknown-linux-musl
           archive-name: NodeInject-linux.tar.gz
         - build: windows
-          os: windows-2019
+          os: windows-latest
           rust: nightly-x86_64-msvc
           target: x86_64-pc-windows-msvc
           archive-name: NodeInject-windows.7z
@@ -31,9 +31,12 @@ jobs:
       with:
           path: './js'
     - name: Install Rust
-      uses: actions/setup-rust@v2
+      uses: actions-rs/toolchain@v1
       with:
-        rust-version: ${{ matrix.rust }}
+        toolchain: ${{ matrix.rust }}
+        profile: minimal
+        override: true
+        target: ${{ matrix.target }}
 
     - name: Build binary
       shell: bash
